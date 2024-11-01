@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,11 +29,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.className} bg-dark-2 text-white antialiased`}
-      >
-        {children}
-      </body>
+      <ClerkProvider appearance={{
+          variables: {
+            colorText: "#E0E0E0",
+            colorPrimary: "#0E78F9",
+            colorBackground: "#1C1F2E",
+            colorInputBackground: "#252836", 
+            colorInputText: "#FFFFFF",
+          },
+        }}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${inter.className} bg-dark-2 text-white antialiased`}
+        >
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
