@@ -1,25 +1,27 @@
-'use client'
-import Link from 'next/link'
-import React from 'react'
-import { TypewriterEffectSmooth } from './ui/typewriter-effect'
-import MobileNav from './MobileNav'
+"use client";
+import Link from "next/link";
+import React from "react";
+import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
+import MobileNav from "./MobileNav";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
 
-  const words = [{
-    text: "Drishya"
-  }]
-
   return (
-    <nav className="flex flex-between z-50 w-full bg-dark-1px-6 py-4 lg:px-10">
-      <Link href={"/"} className='flex items-center gap-1'><TypewriterEffectSmooth words={words} /></Link>
+    <nav className="flex flex-between fixed z-50 w-full bg-dark-1 px-6 py-4 lg:px-10">
+      <Link href="/" className="flex items-center gap-1">
+        <p className="text-[25px] font-extrabold text-white ">DRISHYA</p>
+      </Link>
 
       {/* for mobile compatiblity */}
-      <div className='flex-between gap-5'>
+      <div className="flex-between gap-5">
         {/* clerk user management */}
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
 
         <MobileNav />
       </div>
     </nav>
-  )
-}
+  );
+};
