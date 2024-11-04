@@ -37,7 +37,7 @@ export default function MobileNav() {
                 {sideBarLinks.map((link) => {
                   const isActive =
                     pathname === link.route 
-                  console.log(isActive);
+                  // console.log(isActive);
 
                   return (
                     // cn is used to add multiples and dynamc classnames

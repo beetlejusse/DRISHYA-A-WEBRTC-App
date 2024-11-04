@@ -15,7 +15,7 @@ export const SideBar = () => {
       <div className="flex flex-1 flex-col gap-4">
         {sideBarLinks.map((link) => {
           const isActive = pathname === link.route || pathname.startsWith(`${link.route}/`);
-          console.log(isActive)
+          // console.log(isActive)
 
           return (
             // cn is used to add multiples and dynamc classnames
