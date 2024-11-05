@@ -1,8 +1,8 @@
-// import React from 'react'
+import React from 'react'
 
-// export default function Meeting({params}: { params: { id: string } }) {
-//   return (
-//     <div>Meeting Room: #{params.id}</div>
-//   )
-// }
+export default function Meeting({params}: { params: { id: string } }) {
+  return (
+    <div>hello </div>
+  )
+}
 
