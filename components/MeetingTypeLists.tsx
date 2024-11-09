@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { MeetingModal } from "./Modals/MeetingModal";
 import { useUser } from "@clerk/nextjs";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { ApiError } from "next/dist/server/api-utils";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 
