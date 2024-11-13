@@ -37,7 +37,7 @@ export default function StreamvideoProvider({
                 image: user?.imageUrl
             },
             //used to verify user
-            tokenProvider,
+            tokenProvider: tokenProvider,
         })
 
         setVideoClient(client)
