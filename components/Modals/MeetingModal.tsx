@@ -9,11 +9,11 @@ import { Button } from "../ui/button";
 
 interface MeetingModalProps {
   isOpen: boolean;
-  onClose: () => {};
+  onClose: () => void;
   title: string;
   className?: string;
   children?: ReactNode;
-  handleClick?: () => {};
+  handleClick?: () => void;
   buttonText?: string;
   image?: string;
   buttonIcon?: string;
