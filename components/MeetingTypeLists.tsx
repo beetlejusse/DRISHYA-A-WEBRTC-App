@@ -8,6 +8,7 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 import { Textarea } from "./ui/textarea";
+import ReactDatePicker from 'react-datepicker'
 
 export const MeetingTypeLists = () => {
   const [meeting, setmeeting] = useState<
@@ -83,6 +84,8 @@ export const MeetingTypeLists = () => {
     }
   };
 
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
+
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
       <CardsAtHome
@@ -129,13 +132,27 @@ export const MeetingTypeLists = () => {
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Add a Description
             </label>
-            <Textarea className="border-none bg-black focus-visible:ring-0 focus-visible:ring-offset-0" />
+            <Textarea className="border-none bg-black focus-visible:ring-0 focus-visible:ring-offset-0" onChange={(e) => {
+              setMeetValues({...meetValue, description: e.target.value})
+            }} />
           </div>
 
           <div className="flex w-full flex-col gap-3">
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Select Date and Time
             </label>
+            <ReactDatePicker 
+              selected={meetValue.dateTime}
+              onChange={(date) => setMeetValues({
+                ...meetValue, dateTime: date!
+              })}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm aa"
+              className="w-full rounded bg-dark-2 p-2 focus:outline-none"
+            />
           </div>
         </MeetingModal>
       ) : (
@@ -144,10 +161,10 @@ export const MeetingTypeLists = () => {
           onClose={async () => setmeeting(undefined)}
           title="Meeting Created"
           className="text-center"
-          // handleClick={() => {
-          //   // navigator.clipboard.writeText(meetingLink)
-          //   // toast({title: 'Link Copied'})
-          // }}
+          handleClick={() => {
+            navigator.clipboard.writeText(meetingLink)
+            toast({title: 'Link Copied'})
+          }}
           image="/icons/checked.svg"
           buttonIcon="/icons/copy.svg"
           buttonText="Copy Meeting Link"
