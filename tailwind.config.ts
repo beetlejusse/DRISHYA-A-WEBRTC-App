@@ -13,6 +13,8 @@ const config: Config = {
 				dark: {
 					1: '#1C1F2E',
 					2: '#161925',
+					3: '#252A41',
+					4: '#1E2757',
 				},
 				blue: {
 					1: "#0E78F9"
@@ -82,17 +84,17 @@ const config: Config = {
 			},
 			animation: {
 				"meteor-effect": "meteor 5s linear infinite",
-			  },
-			  keyframes: {
+			},
+			keyframes: {
 				meteor: {
-				  "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
-				  "70%": { opacity: "1" },
-				  "100%": {
-					transform: "rotate(215deg) translateX(-500px)",
-					opacity: "0",
-				  },
+					"0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+					"70%": { opacity: "1" },
+					"100%": {
+						transform: "rotate(215deg) translateX(-500px)",
+						opacity: "0",
+					},
 				},
-			  },
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate"), require('daisyui')],
