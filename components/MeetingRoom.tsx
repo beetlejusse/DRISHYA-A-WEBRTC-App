@@ -13,14 +13,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LayoutList, Users } from "lucide-react";
-import { div, pre } from "framer-motion/client";
-import { Button } from "./ui/button";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import EndCallButton from "./EndCallButton";
 import Loader from "./Loader";
 
@@ -44,6 +40,7 @@ const MeetingRoom = () => {
   const [showParticipants, setShowParticipants] = useState(false);
   const {useCallCallingState} = useCallStateHooks()
   const callingState = useCallCallingState()
+  const router = useRouter()
   if(callingState!== CallingState.JOINED) return <Loader />
 
 
@@ -61,7 +58,7 @@ const MeetingRoom = () => {
           <CallParticipantsList onClose={() => setShowParticipants(false)} />
         </div>
         <div className="flex flex-wrap items-center justify-center fixed bottom-0 w-full gap-5">
-          <CallControls />
+          <CallControls  onLeave={() => router.push(`/`)}/>
 
           <DropdownMenu>
             <div className="flex items-center">

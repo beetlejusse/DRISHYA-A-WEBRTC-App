@@ -8,7 +8,8 @@ import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useToast } from "@/hooks/use-toast";
 import { ToastAction } from "./ui/toast";
 import { Textarea } from "./ui/textarea";
-import ReactDatePicker from 'react-datepicker'
+import ReactDatePicker from "react-datepicker";
+import { Input } from "./ui/input";
 
 export const MeetingTypeLists = () => {
   const [meeting, setmeeting] = useState<
@@ -84,7 +85,7 @@ export const MeetingTypeLists = () => {
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -132,20 +133,26 @@ export const MeetingTypeLists = () => {
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Add a Description
             </label>
-            <Textarea className="border-none bg-black focus-visible:ring-0 focus-visible:ring-offset-0" onChange={(e) => {
-              setMeetValues({...meetValue, description: e.target.value})
-            }} />
+            <Textarea
+              className="border-none bg-black focus-visible:ring-0 focus-visible:ring-offset-0"
+              onChange={(e) => {
+                setMeetValues({ ...meetValue, description: e.target.value });
+              }}
+            />
           </div>
 
           <div className="flex w-full flex-col gap-3">
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Select Date and Time
             </label>
-            <ReactDatePicker 
+            <ReactDatePicker
               selected={meetValue.dateTime}
-              onChange={(date) => setMeetValues({
-                ...meetValue, dateTime: date!
-              })}
+              onChange={(date) =>
+                setMeetValues({
+                  ...meetValue,
+                  dateTime: date!,
+                })
+              }
               showTimeSelect
               timeFormat="HH:mm"
               timeIntervals={15}
@@ -162,8 +169,8 @@ export const MeetingTypeLists = () => {
           title="Meeting Created"
           className="text-center"
           handleClick={() => {
-            navigator.clipboard.writeText(meetingLink)
-            toast({title: 'Link Copied'})
+            navigator.clipboard.writeText(meetingLink);
+            toast({ title: "Link Copied" });
           }}
           image="/icons/checked.svg"
           buttonIcon="/icons/copy.svg"
@@ -178,6 +185,19 @@ export const MeetingTypeLists = () => {
         buttonText="Start Meeting"
         handleClick={createMeeting}
       />
+
+      <MeetingModal
+        isOpen={meeting === "isJoiningMeeting"}
+        onClose={async () => setmeeting(undefined)}
+        title="Copy the Link Here"
+        className="text-center"
+        buttonText="Join Meeting"
+        handleClick={() => router.push(meetValue.link)}
+      >
+        <Input placeholder="Meeting Link" className="border-none bg-dark-2 focus-visible:ring-0 focus-visible:ring-offset-0 " onChange={(e) => setMeetValues({...meetValue, link:e.target.value})} />
+      </MeetingModal>
+
+      {/* destructuring the meetValue becausein above we have used meetValue.link */}
     </section>
   );
 };
