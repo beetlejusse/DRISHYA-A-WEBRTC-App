@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +45,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} ${inter.className} bg-dark-2 text-white antialiased`}
         >
           {children}
+          <Toaster />
         </body>
       </ClerkProvider>
     </html>
