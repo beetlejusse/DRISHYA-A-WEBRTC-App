@@ -9,20 +9,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Drishya",
-  description: "Video Confrencing App",
+  description: "A Video Confrencing and Productivity App",
+  icons: {
+    icon: [`/app-icons/favicon.ico?v=4`]
+  }
 };
 
 export default function RootLayout({
@@ -42,7 +35,7 @@ export default function RootLayout({
           },
         }}>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${inter.className} bg-dark-2 text-white antialiased`}
+          className={` ${inter.className} bg-dark-2 text-white antialiased`}
         >
           {children}
           <Toaster />
