@@ -1,7 +1,10 @@
+'use client'
+
 import React, { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -32,7 +35,8 @@ export const MeetingModal = ({
 }: MeetingModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="flex flex-col w-fu;ll max-w-[520px] border-none gap-6 bg-dark-1 px-6 py-9 text-white">
+      <DialogContent className="flex flex-col w-full max-w-[520px] border-none gap-6 bg-dark-1 px-6 py-9 text-white">
+        <DialogTitle className="sr-only">{title}</DialogTitle> {/* Visually hidden title for screen readers */}
         <div className="flex flex-col gap-6">
           {image && (
             <div className="flex justify-center">
@@ -51,7 +55,7 @@ export const MeetingModal = ({
             onClick={handleClick}
           >
             {buttonIcon && (
-                <Image src={buttonIcon} alt="button icon" width={13} height={13} />
+              <Image src={buttonIcon} alt="button icon" width={13} height={13} />
             )}&nbsp;
             {buttonText || "Schedule Meeting"}
           </Button>
