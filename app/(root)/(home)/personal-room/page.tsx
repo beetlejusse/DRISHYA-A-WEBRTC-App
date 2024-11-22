@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { useGetCallById } from "@/hooks/useGetCallById";
@@ -26,37 +27,41 @@ const Table = ({
 );
 
 export default function PersonalRoom() {
-  const user = useUser();
-  const meetingId = user.user?.id!;
+  const { user, isLoaded } = useUser();
+  const meetingId = user?.id!;
   const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${meetingId}?personal=true`;
   const { call } = useGetCallById(meetingId);
   const client = useStreamVideoClient();
-  const router = useRouter()
+  const router = useRouter();
 
   const startNewMeetingRoom = async () => {
     if (!client || !user) return;
 
     //if we have a client
     if (!call) {
-      const newCall = client.call("default", meetingId);
+      const newCall = client?.call("default", meetingId);
 
-      await newCall?.getOrCreate({
+      await newCall.getOrCreate({
         data: {
           starts_at: new Date().toISOString(),
         },
       });
     }
-    router.push(`/meeting/${meetingId}?personal=true`)
+    router.push(`/meeting/${meetingId}?personal=true`);
   };
+
+  if (!isLoaded)
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
 
   return (
     <div className="flex size-fll flex-col gap-10 text-white">
       <h1 className="text-3xl font-bold">Personal Room</h1>
       <div className="w-full flex flex-col gap-8 xl:max-w-[900px]">
-        <Table
-          title="Topic"
-          description={`${user.user?.username}'s meeting room`}
-        />
+        <Table title="Topic" description={`${user?.username}'s meeting room`} />
         <Table title="Meeting Id" description={`${meetingId}`} />
         <Table title="Invite Friends" description={`${meetingLink}`} />
       </div>

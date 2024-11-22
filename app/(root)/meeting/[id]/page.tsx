@@ -10,7 +10,7 @@ import React, {useState} from 'react'
 
 export default function Meeting({params: {id}}: { params: { id: string } }) {
 
-  const {user, isLoaded } = useUser()
+  const { isLoaded } = useUser()
   const [isSetupComplete, setisSetupComplete] = useState(false)
   const {call, iscallLoading} = useGetCallById(id)
 
