@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 import MobileNav from "./MobileNav";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
 
