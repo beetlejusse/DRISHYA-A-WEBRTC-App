@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -28,7 +29,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10">
-            Get Started
+            <Link href="/auth/sign-in">
+              Get Started
+            </Link>
           </button>
         </motion.div>
       </div>
