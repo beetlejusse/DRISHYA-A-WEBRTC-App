@@ -22,8 +22,9 @@ const Hero = () => {
         >
           Experience seamless video conferencing like never before. Crystal clear, secure, and feature-rich.
         </motion.p>
+        
         <motion.div 
-          className="mt-10 flex justify-center"
+          className="mt-10 flex justify-center space-x-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -33,11 +34,26 @@ const Hero = () => {
               Get Started
             </Link>
           </button>
+
+          {/* GitHub Star Button */}
+          <motion.a 
+            href="https://github.com/beetlejusse/WEBRTC"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 md:py-4 md:text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 .587l3.668 7.568L24 9.187l-6 5.845L19.335 24 12 20.897 4.665 24l1.335-8.968L0 9.187l7.332-.032L12 .587z" />
+            </svg>
+            Star on GitHub
+          </motion.a>
         </motion.div>
       </div>
     </section>
   )
 }
 
-export default Hero
-
+export default Hero;
