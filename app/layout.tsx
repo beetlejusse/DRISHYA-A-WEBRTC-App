@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Drishya",
-  description: "A Video Confrencing and Productivity App",
+  title: "DRISHYA - Modern Video Conferencing",
+  description: "Experience seamless video conferencing with DRISHYA",
   icons: {
-    icon: [`/app-icons/favicon.ico?v=4`]
-  }
+    icon: [`/app-icons/favicon.ico?v=4`],
+  },
 };
 
 export default function RootLayout({
@@ -23,18 +22,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <ClerkProvider appearance={{
+    <html lang="en" className="dark">
+      <ClerkProvider
+        appearance={{
           variables: {
             colorText: "#E0E0E0",
             colorPrimary: "#0E78F9",
             colorBackground: "#1C1F2E",
-            colorInputBackground: "#252836", 
+            colorInputBackground: "#252836",
             colorInputText: "#FFFFFF",
           },
-        }}>
+        }}
+      >
         <body
-          className={` ${inter.className} bg-dark-2 text-white antialiased`}
+          className={`${spaceGrotesk.className} bg-dark-2 text-white antialiased`}
         >
           {children}
           <Toaster />
