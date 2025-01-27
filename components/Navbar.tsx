@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { Search } from "lucide-react";
 import ProjectMenu from "./customs/project-menu";
-import { TimeDisplay } from "./customs/time-display";
+// import { TimeDisplay } from "./customs/time-display";
 import { ExploreDropDown } from "./Explore";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
@@ -29,7 +29,7 @@ export default function Navbar() {
             <p className="text-sm text-gray-300">A WEBRTC App</p>
           </Link>
 
-          {/* Desktop Menu */}
+          
           <div className="hidden md:block ml-10">
             <div className="flex items-baseline space-x-4">
               <Link
@@ -65,18 +65,14 @@ export default function Navbar() {
             onClick={toggleMobileMenu}
             aria-label="Toggle Menu"
           >
-            {/* Icon for the mobile menu (hamburger icon) */}
-            <HamburgerMenuIcon className="w-6 h-6" />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
+            
+            {/* <HamburgerMenuIcon className="w-6 h-6" /> */}
+            Explore
           </button>
 
-          {/* Right Side Icons */}
+          
           <div className="flex flex-1 items-center justify-end space-x-4">
-            <TimeDisplay />
+            {/* <TimeDisplay /> */}
             <ProjectMenu />
             <div className="relative hidden md:block">
               <input
