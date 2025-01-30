@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { Search } from "lucide-react";
 import ProjectMenu from "./customs/project-menu";
-import { TimeDisplay } from "./customs/time-display";
+// import { TimeDisplay } from "./customs/time-display";
 import { ExploreDropDown } from "./Explore";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
@@ -14,6 +14,18 @@ export default function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleMobileMenu = () => setIsOpen(!isOpen);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-gradient-to-r from-purple-800 to-indigo-900 shadow-lg border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -29,7 +41,6 @@ export default function Navbar() {
             <p className="text-sm text-gray-300">A WEBRTC App</p>
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden md:block ml-10">
             <div className="flex items-baseline space-x-4">
               <Link
@@ -38,9 +49,9 @@ export default function Navbar() {
               >
                 Home
               </Link>
-              <div
+              {/* <div
                 className="relative text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
-                onMouseEnter={() => setIsDropdownOpen(true)}
+                onMouseEnter={() => setIsDropdownOpen(!isDropdownOpen)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
               >
                 Explore
@@ -49,7 +60,23 @@ export default function Navbar() {
                     <ExploreDropDown />
                   </div>
                 )}
+              </div> */}
+
+              <div className="relative" ref={dropdownRef}>
+                <div
+                  className="relative text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                >
+                  Explore
+                </div>
+
+                {isDropdownOpen && (
+                  <div className="absolute left-0 top-full mt-2 w-64 shadow-lg rounded-lg p-4">
+                    <ExploreDropDown />
+                  </div>
+                )}
               </div>
+
               <Link
                 href="/about"
                 className="text-gray-300 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -65,18 +92,12 @@ export default function Navbar() {
             onClick={toggleMobileMenu}
             aria-label="Toggle Menu"
           >
-            {/* Icon for the mobile menu (hamburger icon) */}
-            <HamburgerMenuIcon className="w-6 h-6" />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
+            {/* <HamburgerMenuIcon className="w-6 h-6" /> */}
+            Explore
           </button>
 
-          {/* Right Side Icons */}
           <div className="flex flex-1 items-center justify-end space-x-4">
-            <TimeDisplay />
+            {/* <TimeDisplay /> */}
             <ProjectMenu />
             <div className="relative hidden md:block">
               <input
