@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { useSession } from "@clerk/nextjs";
 import quotesy from "quotesy";
 import { MeetingTypeLists } from "@/components/MeetingTypeLists";
-import { Calendar, Users, Video, FileVideo } from 'lucide-react';
 import { motion } from "framer-motion";
-import { Card } from "@/components/ui/card";
+import { Clock, Calendar, Quote } from 'lucide-react';
 
 export default function Home() {
   const now = new Date();
@@ -28,113 +27,88 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  const actions = [
-    {
-      title: "New Meeting",
-      description: "Start an Instant Meeting",
-      icon: Video,
-      color: "bg-gradient-to-br from-orange-500 to-orange-600",
-      href: "#",
-    },
-    {
-      title: "Schedule Meeting",
-      description: "Plan a Meeting",
-      icon: Calendar,
-      color: "bg-gradient-to-br from-purple-500 to-purple-600",
-      href: "#",
-    },
-    {
-      title: "Join Meeting",
-      description: "Join via invitation link",
-      icon: Users,
-      color: "bg-gradient-to-br from-blue-500 to-blue-600",
-      href: "#",
-    },
-    {
-      title: "View Recordings",
-      description: "Meeting Recordings",
-      icon: FileVideo,
-      color: "bg-gradient-to-br from-amber-500 to-amber-600",
-      href: "#",
-    },
-  ];
-
   if (!mounted) return null;
 
   return (
-    <div className="flex size-full flex-col gap-8">
+    <div className="h-full w-full text-gray-100">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative h-[300px] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className=" p-4 sm:p-6 lg:p-8 flex flex-col"
       >
-        <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
-        <div className="relative flex h-full flex-col justify-between p-6 lg:p-8">
+        <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-4"
+            className="flex items-center gap-4 mb-4 sm:mb-0"
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
-              <span className="text-xl font-semibold text-white">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500">
+              <span className="text-xl font-bold text-white">
                 {user?.username?.[0]?.toUpperCase()}
               </span>
             </div>
-            <h2 className="text-lg font-medium text-white">
-              Welcome back, {user?.username?.toLocaleUpperCase()}
+            <h2 className="text-xl sm:text-2xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+              Welcome, {user?.username?.toLocaleUpperCase()}
             </h2>
           </motion.div>
-
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="space-y-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-left sm:text-right"
           >
-            <h1 className="font-cal text-4xl font-bold text-white lg:text-7xl">
+            <p className="text-2xl sm:text-3xl font-bold flex items-center gap-2">
+              <Clock className="w-6 h-6 text-purple-400" />
               {time}
-            </h1>
-            <p className="text-lg font-medium text-white/80 lg:text-2xl">
+            </p>
+            <p className="text-base sm:text-lg text-gray-400 flex items-center gap-2 sm:justify-end">
+              <Calendar className="w-5 h-5" />
               {date}
             </p>
           </motion.div>
+        </header>
 
-          <motion.h3
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="max-w-2xl text-sm font-medium text-white/70 lg:text-base"
-          >
-            {quote}
-          </motion.h3>
-        </div>
-      </motion.div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {actions.map((action, i) => (
-          <motion.div
-            key={action.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + i * 0.1 }}
-          >
-            <Card
-              className={`group relative overflow-hidden ${action.color} p-6 transition-all hover:shadow-lg`}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-2xl mb-8"
+        >
+          <div className="absolute inset-0 bg-grid-white/[0.02] [mask-image:linear-gradient(0deg,transparent,black)]" />
+          <div className="relative p-6 sm:p-8 lg:p-10">
+            <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400 mb-4" />
+            <motion.h3
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-300 italic"
             >
-              <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(0deg,transparent,black)]" />
-              <div className="relative">
-                <action.icon className="mb-4 size-8 text-white" />
-                <h3 className="mb-2 font-semibold text-white">{action.title}</h3>
-                <p className="text-sm text-white/80">{action.description}</p>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+              "{quote.split('—')[0]}"
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="mt-2 text-right text-sm sm:text-base text-gray-400"
+            >
+              — {quote.split('—')[1]}
+            </motion.p>
+          </div>
+        </motion.div>
 
-      {/* <MeetingTypeLists /> */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="flex-grow overflow-auto"
+        >
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Your Meetings</h2>
+          <MeetingTypeLists />
+        </motion.div>
+      </motion.div>
     </div>
   );
-};
+}
 
