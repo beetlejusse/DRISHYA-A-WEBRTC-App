@@ -21,7 +21,7 @@ const CTA = () => {
       >
         <div className="inline-flex rounded-md shadow">
           <Link
-            href="/auth/sign-in"
+            href="/sign-in"
             className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-purple-600 bg-white hover:bg-purple-50"
           >
             Get started

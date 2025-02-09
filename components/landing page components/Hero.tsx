@@ -30,12 +30,10 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <button className="px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 md:py-4 md:text-lg md:px-10">
-            <Link href="/auth/sign-in">
+            <Link href="/sign-in">
               Get Started
             </Link>
           </button>
-
-          {/* GitHub Star Button */}
           <motion.a 
             href="https://github.com/beetlejusse/WEBRTC"
             target="_blank"
