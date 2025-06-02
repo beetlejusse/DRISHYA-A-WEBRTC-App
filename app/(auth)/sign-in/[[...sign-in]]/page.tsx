@@ -9,7 +9,7 @@ export default function SignInPage() {
 
       <div className="z-10 flex flex-col items-center justify-center p-6 rounded-lg bg-black bg-opacity-40 backdrop-blur-lg shadow-lg">
         <h1 className="text-white text-3xl font-bold mb-4">Welcome Back to DRISHYA</h1>
-        <SignIn forceRedirectUrl="/home" />
+        <SignIn fallbackRedirectUrl="/home" />
       </div>
     </main>
   )
