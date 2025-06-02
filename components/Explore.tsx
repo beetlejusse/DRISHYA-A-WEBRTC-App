@@ -11,7 +11,7 @@ export const ExploreDropDown = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-purple-900 text-white rounded-lg shadow-lg">
+    <div className="flex flex-col gap-4 p-4 bg-slate-900/85 backdrop-blur-lg text-white rounded-lg shadow-lg">
       {exploreLinks.map((link) => {
         const isActive =
           pathname === link.route || pathname.startsWith(`${link.route}/`);
@@ -21,9 +21,9 @@ export const ExploreDropDown = () => {
             href={link.route}
             key={link.label}
             className={cn(
-              "flex items-center gap-4 p-2 rounded-md hover:bg-purple-700",
+              "flex items-center gap-4 p-2 rounded-md ",
               {
-                "bg-purple-700": isActive,
+                "bg-purple-600": isActive,
               }
             )}
           >
