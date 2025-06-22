@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { Analytics } from "@vercel/analytics/next"
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <body
           className={`${spaceGrotesk.className} bg-dark-2 text-white antialiased`}
         >
+          <Analytics />
           {children}
           <Toaster />
         </body>
